@@ -24,7 +24,7 @@ public class Caminhos {
     }
 
     public String caminhoDestino() {
-        String caminhoDestino = novoArq() + "//" + paramentro;
+        String caminhoDestino = novoArq() + "\\" + paramentro;
 
         return caminhoDestino;
     }

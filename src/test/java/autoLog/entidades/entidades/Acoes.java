@@ -13,6 +13,10 @@ public class Acoes {
     private String caminhoOrigin;
     private String caminhoDestino;
 
+    public Acoes() {
+
+    }
+
     public Acoes(String paramentro, List<Atributos> file, String caminhoOrigin, String caminhoDestino) {
         this.paramentro = paramentro;
         this.file = file;
@@ -46,9 +50,10 @@ public class Acoes {
         }
     }
 
-    public void escrever() {
+    public void escrever(List<Atributos> lista) {
+        System.out.println(caminhoDestino);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoDestino))) {
-            for (Atributos login : file) {
+            for (Atributos login : lista) {
                 bw.write(login.getLogin() + ":" + login.getSenha());
                 bw.newLine();
             }

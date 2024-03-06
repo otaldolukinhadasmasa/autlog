@@ -12,6 +12,7 @@ import autoLog.utilitarios.Preencher2;
 import autoLog.utilitarios.WebSite;
 
 public class LerEscreverOperacao extends Funcoes {
+
     @Override
     public void funcaoLerEscrever() {
         Scanner sc = new Scanner(System.in);
@@ -19,6 +20,7 @@ public class LerEscreverOperacao extends Funcoes {
         List<Atributos> file = new ArrayList<>();
         boolean valorValido = false;
 
+        String caminhoDestino;
         do {
             try {
                 System.out.println("Informe o nome do arquivo: ");
@@ -30,13 +32,13 @@ public class LerEscreverOperacao extends Funcoes {
                 Caminhos caminho = new Caminhos(nomeArq, paramentro);
 
                 String caminhoOrigin = caminho.caminhoOrigin();
-                String caminhoDestino = caminho.caminhoDestino();
+                caminhoDestino = caminho.caminhoDestino();
 
                 Acoes acoes = new Acoes(paramentro, file, caminhoOrigin, caminhoDestino);
 
                 acoes.ler();
 
-                acoes.escrever();
+                acoes.escrever(file);
 
                 valorValido = true;
 
@@ -58,6 +60,7 @@ public class LerEscreverOperacao extends Funcoes {
 
         List<Atributos> file = new ArrayList<>();
         boolean valorValido = false;
+        String caminhoDestino = "";
 
         do {
             try {
@@ -70,7 +73,7 @@ public class LerEscreverOperacao extends Funcoes {
                 Caminhos caminho = new Caminhos(nomeArq, paramentro);
 
                 String caminhoOrigin = caminho.caminhoOrigin();
-                String caminhoDestino = caminho.caminhoDestino();
+                caminhoDestino = caminho.caminhoDestino();
 
                 Acoes acoes = new Acoes(paramentro, file, caminhoOrigin, caminhoDestino);
 
@@ -103,9 +106,11 @@ public class LerEscreverOperacao extends Funcoes {
             System.out.println("Website não encontrado.");
         }
 
-        Preencher2 preencher = new Preencher2(navegador, file, site, webSite);
+        Preencher2 preencher = new Preencher2(navegador, file, site, webSite, caminhoDestino);
         preencher.preencher();
 
         sc.close();
+
+        navegador.quit();
     }
 }

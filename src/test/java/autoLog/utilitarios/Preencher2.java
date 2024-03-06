@@ -1,6 +1,7 @@
 package autoLog.utilitarios;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,7 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import autoLog.entidades.entidades.Acoes;
 import autoLog.entidades.entidades.Atributos;
+import autoLog.entidades.entidades.Caminhos;
 
 import java.time.Duration;
 
@@ -19,6 +22,9 @@ public class Preencher2 {
     private WebSite site;
     private WebDriver navegador;
     private List<Atributos> file;
+    private String caminhoDestino;
+
+    List<Atributos> fileV = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
@@ -26,11 +32,12 @@ public class Preencher2 {
 
     }
 
-    public Preencher2(WebDriver navegador, List<Atributos> file, WebSite site, String webSite) {
+    public Preencher2(WebDriver navegador, List<Atributos> file, WebSite site, String webSite, String caminhoDestino) {
         this.webSite = webSite;
         this.file = file;
         this.site = site;
         this.navegador = navegador;
+        this.caminhoDestino = caminhoDestino;
     }
 
     public void preencher() {
@@ -78,12 +85,24 @@ public class Preencher2 {
                     segundaCaixa.sendKeys(login.getSenha());
 
                     System.out.println("Proximo login?");
+                    System.out.println("s - Continuar sem salvar login.");
+                    System.out.println("a - Salvar login e continuar.");
                     valorValido = sc.next().charAt(0);
 
+                    if (valorValido == 'a') {
+                        String loginV = login.getLogin();
+                        String senhaV = login.getSenha();
+                        fileV.add(new Atributos(loginV, senhaV));
+
+                        valorValido = 's';
+                    }
                 }
             } while (valorValido != 's');
         }
         System.out.println("Acabou as linhas! Programa encerrado.");
+
+        Acoes acoes = new Acoes(caminhoDestino, file, webSite, caminhoDestino);
+        acoes.escrever(fileV);
     }
 
     private WebElement waitUntilElementVisible(By locator) {

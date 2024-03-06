@@ -14,13 +14,8 @@ public class Main {
         System.out.println("2. Funcionalidades da Automação");
         int opc = sc.nextInt();
 
-        // Opcoes opcoes = new Opcoes(opc);
-        // Funcoes funcao = new Funcoes();
-
         LerEscreverOperacao lerEscrever = new LerEscreverOperacao();
-        // AutomaticaOperacao automatica = new AutomaticaOperacao();
 
-        // Funcoes operacao = new LerEscreverOperacao();
         switch (opc) {
             case 1:
                 lerEscrever.funcaoLerEscrever();

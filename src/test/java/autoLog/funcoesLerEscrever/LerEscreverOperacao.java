@@ -61,6 +61,7 @@ public class LerEscreverOperacao extends Funcoes {
         List<Atributos> file = new ArrayList<>();
         boolean valorValido = false;
         String caminhoDestino = "";
+        String paramentro = "";
 
         do {
             try {
@@ -68,7 +69,7 @@ public class LerEscreverOperacao extends Funcoes {
                 String nomeArq = sc.nextLine();
 
                 System.out.println("Informe o paramentro de busca: ");
-                String paramentro = sc.nextLine();
+                paramentro = sc.nextLine();
 
                 Caminhos caminho = new Caminhos(nomeArq, paramentro);
 
@@ -90,8 +91,12 @@ public class LerEscreverOperacao extends Funcoes {
             }
         } while (!valorValido);
 
-        System.out.println("Informe o site:");
-        String webSite = sc.nextLine();
+        /*
+         * System.out.println("Informe o site:");
+         * String webSite = sc.nextLine();
+         */
+
+        String webSite = paramentro;
 
         System.out.println("------------------------------------------------");
         System.out.println("Carregando site...");
